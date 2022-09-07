@@ -1,16 +1,14 @@
-import React from 'react';
-import './App.css';
-import InputTrainCard from "./InputTrainCard";
-import OutputTrainCard from './OutputTrainCard';
-import { Grid } from "@mui/material";
+import React from "react";
+import TrainInputCard from "./components/Train/TrainInputCard";
+import TrainOutputCard from "./components/Train/TrainOutputCard";
 
 function App() {
   return (
     <div className="App">
-      <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <InputTrainCard />
-        <OutputTrainCard /> 
-      </Grid>
+      <h1>Input</h1>
+      <TrainInputCard />
+      <h1>Output</h1>
+      <TrainOutputCard />
     </div>
   );
 }

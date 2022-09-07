@@ -1,12 +1,13 @@
 import * as React from "react";
 import { Card, CardContent } from "@mui/material";
+import TrainLabel from "./TrainLabel";
+import TrainList from "./TrainList";
 
 function OutputTrainCard() {
   return (
-    <Card sx={{ minWidth: 750, display: "inline-block", maxHeight: 400 }}>
-      <CardContent>
-        <label>Sorted train list:</label>
-      </CardContent>
+    <Card>
+      <TrainLabel/>
+      <TrainList/>
     </Card>
   );
 }
