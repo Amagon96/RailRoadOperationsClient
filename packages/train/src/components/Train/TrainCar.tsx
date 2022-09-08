@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Button, TableCell } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 
@@ -15,24 +15,22 @@ const TrainCar = ({
   receiver,
   classificationTrack,
 }: TrainCarProps) => {
-    return (
-        <Box>
-          <Grid justifyContent="space-between" container paddingX={5} paddingY={1}>
-            <Grid>
-              <p>{name}</p>
-            </Grid>
-            <Grid>
-              <p>{destination}</p>
-            </Grid>
-            <Grid>
-              <p>{receiver}</p>
-            </Grid>
-            <Grid>
-                {false? <p>{classificationTrack}</p>:<Button>Remove</Button>}
-            </Grid>
-          </Grid>
-        </Box>
-      );
+  return (
+    <>
+      <TableCell>
+        {name}
+      </TableCell>
+      <TableCell>
+        {destination}
+      </TableCell>
+      <TableCell>
+        {receiver}
+      </TableCell>
+      <TableCell>
+        {false ? <p>{classificationTrack}</p> : <Button>Remove</Button>}
+      </TableCell>
+    </>
+  );
 };
 
 export default TrainCar;
