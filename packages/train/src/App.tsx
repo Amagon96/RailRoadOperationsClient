@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.css"
 import TrainInputCard from "./components/Train/TrainInputCard";
 import TrainOutputCard from "./components/Train/TrainOutputCard";
 

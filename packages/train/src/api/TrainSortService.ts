@@ -1,0 +1,11 @@
+import axios from "axios";
+import { ITrainCar } from "../types/TrainCar";
+export const baseUrl = "http://localhost:8080/trains/railroadoperations"
+
+export const TrainSort = (trainCars: Map<string, ITrainCar>) => {
+    return axios.post<ITrainCar[]>(baseUrl, trainCars.values, {
+        headers:{
+            'Content-Type':'application/json'
+        }
+    })
+}

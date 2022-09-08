@@ -1,34 +1,29 @@
 import { TableRow } from "@mui/material";
 import React from "react";
+import { ITrainCar } from "../../types/TrainCar";
 import TrainCar from "./TrainCar";
 
-const TrainList = () => {
-  const trainList = [
-    {
-      id: 1,
-      name: "Car 1",
-      destination: "Houston",
-      receiver: "FedEx",
-      classificationTrack: null,
-    },
-    {
-      id: 2,
-      name: "Car 2",
-      destination: "Chicago",
-      receiver: "UPS",
-      classificationTrack: null,
-    },
-  ];
+interface TrainListProps {
+  trainList: Map<string,ITrainCar>
+  onRemove: (id:string) => void
+}
+
+const TrainList = ({trainList, onRemove}:TrainListProps) => {
+ 
+  const handleRemove = (id:string) => {
+    onRemove(id)
+  }
   return (
     <>
-      {trainList.map((car) => (
+      {Array.from(trainList).map(([id,car]) => (
         <TableRow>
           <TrainCar
-            key={car.id}
+            key={id}
             name={car.name}
             destination={car.destination}
             receiver={car.receiver}
             classificationTrack={car.classificationTrack}
+            onRemove={handleRemove}
           />
         </TableRow>
       ))}
