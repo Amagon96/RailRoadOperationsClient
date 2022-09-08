@@ -1,17 +1,19 @@
 import {Classification} from "../../types/Classification";
 import React, {useEffect, useState} from "react";
+import Axios from "axios";
 
 const ClassificationComponent = (props: {type: string}) => {
     const [classifications, setClassifications] = useState<Classification[]>([]);
-    const [error, setError] = useState({});
 
     useEffect(() => {
-        const uri = props.type === 'DESTINATION'? 'http://localhost:8080/destinations': 'http://localhost:8080/receivers'
-        fetch(uri)
-            .then(response => response.json())
-            .then(res => setClassifications(res))
-            .catch(err => setError(err));
-    }, [])
+        if (props.type !== 'DESTINATION' && props.type !== 'RECEIVER') {
+            console.error(`${props.type} is not a valid type`)
+        }
+        const uri = props.type === 'DESTINATION'? 'http://localhost:8080/destinations': 'http://localhost:8080/receivers';
+        Axios({url: uri})
+            .then(res => setClassifications(res.data))
+            .catch(err => console.error(err));
+    }, [setClassifications])
 
     return (
         <div>
