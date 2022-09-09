@@ -10,47 +10,23 @@ import {
   TableCell,
   SelectChangeEvent,
 } from "@mui/material";
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 import { ITrainCar } from "../../types/TrainCar";
+import { DestinationService } from "../../api/DestinationService";
+import { ReceiverService } from "../../api/ReceiverService";
 
-const destinations = [
-  {
-    value: "1",
-    label: "Houston",
-  },
-  {
-    value: "2",
-    label: "Chicago",
-  },
-  {
-    value: "3",
-    label: "LA",
-  },
-];
-
-const receivers = [
-  {
-    value: "1",
-    label: "FedEx",
-  },
-  {
-    value: "2",
-    label: "UPS",
-  },
-  {
-    value: "3",
-    label: "Old Dominion",
-  },
-];
+interface Classification {
+  name: string
+  classification: number 
+}
 
 interface InputRowProps {
   onAdd: (id: string, trainCar: ITrainCar) => void;
 }
 
 const InputRow = ({ onAdd }: InputRowProps) => {
-  const [name, setName] = useState("");
-  const [destination, setDestination] = useState("");
-  const [receiver, setReceiver] = useState("");
+  const [destination, setDestination] = useState([]);
+  const [receiver, setReceiver] = useState([]);
   const [trainCar, setTrainCar] = useState<ITrainCar>({
     name: "",
     destination: "",
@@ -58,15 +34,36 @@ const InputRow = ({ onAdd }: InputRowProps) => {
     classificationTrack: undefined,
   });
 
-  const handleChangeName = (event:any) => {
-    setTrainCar((prevState)=>({...prevState,name:event.target.value}))
-  }
+  useEffect(() => {
+    (async () => {
+      const result = await DestinationService();
+      const data = result.data;
+      setDestination(data);
+    })();
+    (async () => {
+      const result = await ReceiverService();
+      const data = result.data;
+      setReceiver(data);
+    })();
+
+    return () => {}
+  }, []);
+
+  const handleChangeName = (event: any) => {
+    setTrainCar((prevState) => ({ ...prevState, name: event.target.value }));
+  };
   const handleChangeDestination = (event: SelectChangeEvent) => {
-    setTrainCar((prevState)=>({...prevState,destination:event.target.value}))
+    setTrainCar((prevState) => ({
+      ...prevState,
+      destination: event.target.value,
+    }));
   };
 
   const handleChangeReceiver = (event: SelectChangeEvent) => {
-    setTrainCar((prevState)=>({...prevState,receiver:event.target.value}))
+    setTrainCar((prevState) => ({
+      ...prevState,
+      receiver: event.target.value,
+    }));
   };
 
   const handleAdd = () => {
@@ -76,20 +73,26 @@ const InputRow = ({ onAdd }: InputRowProps) => {
   return (
     <TableRow>
       <TableCell>
-        <TextField id="name-basic" label="Name" variant="outlined" onChange={handleChangeName} />
+        <TextField
+          id="name-basic"
+          label="Name"
+          variant="outlined"
+          onChange={handleChangeName}
+          value={trainCar.name}
+        />
       </TableCell>
       <TableCell>
         <FormControl fullWidth>
           <Select
             id="destination"
             label="Destination"
-            value={destination}
+            value={trainCar.destination}
             input={<OutlinedInput />}
             onChange={handleChangeDestination}
           >
-            {destinations.map((option) => (
-              <MenuItem key={option.value} value={option.label}>
-                {option.label}
+            {destination.map((option: Classification) => (
+              <MenuItem key={option.classification} value={option.name}>
+                {option.name}
               </MenuItem>
             ))}
           </Select>
@@ -100,13 +103,13 @@ const InputRow = ({ onAdd }: InputRowProps) => {
           <Select
             id="receiver"
             label="Receiver"
-            value={receiver}
+            value={trainCar.receiver}
             input={<OutlinedInput />}
             onChange={handleChangeReceiver}
           >
-            {receivers.map((option) => (
-              <MenuItem key={option.value} value={option.label}>
-                {option.label}
+            {receiver.map((option: Classification) => (
+              <MenuItem key={option.classification} value={option.name}>
+                {option.name}
               </MenuItem>
             ))}
           </Select>
