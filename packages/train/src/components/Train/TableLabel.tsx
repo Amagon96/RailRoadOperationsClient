@@ -1,13 +1,14 @@
+import react from "react";
 import { Button, TableCell, TableRow } from "@mui/material";
-import { TrainSort } from "../../api/TrainSortService";
-import { Box } from "@mui/system";
-import React from "react";
 
-const TrainLabel = () => {
+interface TableLabelProps {
+  onSort: () => Promise<void>;
+}
 
+const TableLabel = ({ onSort }: TableLabelProps) => {
   const handleSort = () => {
-    
-  }
+    onSort();
+  };
 
   return (
     <TableRow>
@@ -27,4 +28,4 @@ const TrainLabel = () => {
   );
 };
 
-export default TrainLabel;
+export default TableLabel;

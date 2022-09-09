@@ -3,7 +3,8 @@ import { Box } from "@mui/system";
 import React from "react";
 import { ITrainCar } from "../../types/TrainCar";
 
-interface TrainCarProps {
+interface CarItemProps {
+  id: string;
   name: string;
   destination: string;
   receiver: string;
@@ -11,15 +12,16 @@ interface TrainCarProps {
   onRemove: (id: string) => void;
 }
 
-const TrainCar = ({
+const CarItem = ({
+  id,
   name,
   destination,
   receiver,
   classificationTrack,
   onRemove,
-}: TrainCarProps) => {
+}: CarItemProps) => {
   const handleRemove = () => {
-    onRemove(name);
+    onRemove(id);
   };
 
   return (
@@ -40,4 +42,4 @@ const TrainCar = ({
   );
 };
 
-export default TrainCar;
+export default CarItem;

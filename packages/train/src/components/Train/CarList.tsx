@@ -1,24 +1,25 @@
 import { TableRow } from "@mui/material";
 import React from "react";
 import { ITrainCar } from "../../types/TrainCar";
-import TrainCar from "./TrainCar";
+import CarItem from "./CarItem";
 
-interface TrainListProps {
-  trainList: Map<string,ITrainCar>
-  onRemove: (id:string) => void
+interface CarListProps {
+  trainList: Map<string, ITrainCar>;
+  onRemove: (id: string) => void;
 }
 
-const TrainList = ({trainList, onRemove}:TrainListProps) => {
- 
-  const handleRemove = (id:string) => {
-    onRemove(id)
-  }
+const CarList = ({ trainList, onRemove }: CarListProps) => {
+  const handleRemove = (id: string) => {
+    onRemove(id);
+  };
+
   return (
     <>
-      {Array.from(trainList).map(([id,car]) => (
+      {Array.from(trainList).map(([id, car]) => (
         <TableRow>
-          <TrainCar
+          <CarItem
             key={id}
+            id={id}
             name={car.name}
             destination={car.destination}
             receiver={car.receiver}
@@ -31,4 +32,4 @@ const TrainList = ({trainList, onRemove}:TrainListProps) => {
   );
 };
 
-export default TrainList;
+export default CarList;

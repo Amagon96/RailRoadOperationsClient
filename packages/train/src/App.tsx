@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css"
-import TrainInputCard from "./components/Train/TrainInputCard";
-import TrainOutputCard from "./components/Train/TrainOutputCard";
+import InputCard from "./components/Train/InputCard";
+import OutputCard from "./components/Train/OutputCard";
+import { ITrainCar } from "./types/TrainCar";
 
 function App() {
+
+  const [sortedTrain, setSortedTrain] = useState<ITrainCar[]>([])
+
+  const handleSort = (sortedTrain: ITrainCar[]) => {
+    setSortedTrain(sortedTrain)
+  }
+
   return (
     <div className="App">
       <h1>Input</h1>
-      <TrainInputCard />
+      <InputCard onSort={handleSort}/>
       <h1>Output</h1>
-      <TrainOutputCard />
+      <OutputCard carList={sortedTrain}/>
     </div>
   );
 }
