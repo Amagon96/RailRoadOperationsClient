@@ -12,15 +12,15 @@ const SortedCarList = ({trainList}: SortedCarListProps) => {
   return (
     <>
       {trainList.map((car) => (
-        <TableRow>
+        <TableRow key={Math.random()}>
           <CarItem
-            key={Math.random()}
             id={car.name}
             name={car.name}
             destination={car.destination}
             receiver={car.receiver}
             classificationTrack={car.classificationTrack}
             onRemove={(id:string)=>{}}
+            isOutput={true}
           />
         </TableRow>
       ))}

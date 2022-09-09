@@ -10,6 +10,7 @@ interface CarItemProps {
   receiver: string;
   classificationTrack?: number;
   onRemove: (id: string) => void;
+  isOutput: boolean;
 }
 
 const CarItem = ({
@@ -19,6 +20,7 @@ const CarItem = ({
   receiver,
   classificationTrack,
   onRemove,
+  isOutput,
 }: CarItemProps) => {
   const handleRemove = () => {
     onRemove(id);
@@ -30,7 +32,7 @@ const CarItem = ({
       <TableCell>{destination}</TableCell>
       <TableCell>{receiver}</TableCell>
       <TableCell>
-        {false ? (
+        {isOutput ? (
           <p>{classificationTrack}</p>
         ) : (
           <Button variant="outlined" color="error" onClick={handleRemove}>

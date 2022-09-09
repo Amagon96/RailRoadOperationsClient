@@ -14,7 +14,7 @@ function OutputCard({carList}:OutputCardProps) {
     <TableContainer component={Paper} sx={{ margin: "25px" }}>
       <Table>
         <TableHead>
-        <TableLabel onSort={()=>new Promise(()=> undefined )}/>
+        <TableLabel isOutput={true} onSort={()=>new Promise(()=> undefined )}/>
         </TableHead>
         <TableBody>
           <SortedCarList trainList={carList}/>

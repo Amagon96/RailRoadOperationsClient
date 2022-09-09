@@ -16,15 +16,15 @@ const CarList = ({ trainList, onRemove }: CarListProps) => {
   return (
     <>
       {Array.from(trainList).map(([id, car]) => (
-        <TableRow>
+        <TableRow key={id}>
           <CarItem
-            key={id}
             id={id}
             name={car.name}
             destination={car.destination}
             receiver={car.receiver}
             classificationTrack={car.classificationTrack}
             onRemove={handleRemove}
+            isOutput={false}
           />
         </TableRow>
       ))}

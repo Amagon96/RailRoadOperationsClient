@@ -2,10 +2,11 @@ import react from "react";
 import { Button, TableCell, TableRow } from "@mui/material";
 
 interface TableLabelProps {
+  isOutput: boolean;
   onSort: () => Promise<void>;
 }
 
-const TableLabel = ({ onSort }: TableLabelProps) => {
+const TableLabel = ({ onSort, isOutput }: TableLabelProps) => {
   const handleSort = () => {
     onSort();
   };
@@ -16,7 +17,7 @@ const TableLabel = ({ onSort }: TableLabelProps) => {
       <TableCell>Destination</TableCell>
       <TableCell>Receiver</TableCell>
       <TableCell>
-        {false ? (
+        {isOutput ? (
           "Classification Track"
         ) : (
           <Button variant="contained" color="secondary" onClick={handleSort}>
