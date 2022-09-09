@@ -1,46 +1,58 @@
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { webpackLoadRemote } = require("../../webpack-load-remote");
+const path = require("path");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
-const dependencies = require("./package.json").dependencies;
-const path = require("path");
-
 module.exports = (webpackConfigEnv, argv) => {
+  // const orgName = "IL";
   // const defaultConfig = singleSpaDefaults({
-  //   orgName: "IL",
-  //   projectName: "classification",
+  //   orgName,
+  //   projectName: "root-config",
   //   webpackConfigEnv,
   //   argv,
+  //   disableHtmlGeneration: true,
   // });
   // console.log(webpackConfigEnv)
   // console.log(argv)
-  // console.log(defaultConfig)
+  // console.log(defaultConfig.module.rules)
 
-  // return merge(defaultConfig, {
+  // const mergeRes=  merge(defaultConfig, {
   //   output: {
-  //     publicPath: 'http://localhost:3001/',
+  //     publicPath: 'http://localhost:3000/',
   //   },
   //   // modify the webpack config however you'd like to by adding to this object
   //   plugins: [
-  //     new ModuleFederationPlugin({
-  //       name: 'classification',
-  //       library: { type: 'var', name: 'classification' },
-  //       filename: 'dashboard-remote.js',
-  //       remotes: {},
-  //       exposes: {
-  //         ".": './src/IL-classification'
+  //     new HtmlWebpackPlugin({
+  //       inject: false,
+  //       template: "src/index.ejs",
+  //       templateParameters: {
+  //         isLocal: webpackConfigEnv && webpackConfigEnv.isLocal,
+  //         orgName,
   //       },
-  //       shared: { 'react': { singleton: true }, 'react-dom': {singleton:true}, 'single-spa-react':{singleton:true}},
   //     }),
-  //   ]
+  //     new ModuleFederationPlugin({
+  //       name: 'root-config',
+  //       library: { type: 'var', name: 'root-config' },
+  //       filename: 'remoteEntry.js',
+  //       remotes: {"@IL/classification": webpackLoadRemote("classification", 3001)},
+  //       exposes: {},
+  //       shared: [],
+  //     }),
+  //   ],
   // });
+  // console.log(mergeRes)
+  // return mergeRes
   const orgName = "IL";
-  const projectName = "classification";
+  const projectName = "root-config";
   const filename = `${orgName}-${projectName}`;
   const isProduction = argv.p || argv.mode === "production";
 
   return {
     mode: isProduction ? "production" : "development",
-    entry: path.resolve(process.cwd(), `src/IL-classification`),
+    entry: {
+      [filename]: path.resolve(process.cwd(), `src/${filename}`),
+    },
     output: {
       filename: `${filename}.js`,
       path: path.resolve(process.cwd(), "dist"),
@@ -70,7 +82,7 @@ module.exports = (webpackConfigEnv, argv) => {
     },
     devtool: "source-map",
     devServer: {
-      port: 3001,
+      port: 3000,
       historyApiFallback: true,
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -81,6 +93,15 @@ module.exports = (webpackConfigEnv, argv) => {
         },
       },
       allowedHosts: "all",
+      proxy: {
+        "/api": {
+          target: "https://my-api.com",
+          pathRewrite: {
+            "^/api": "",
+          },
+          changeOrigin: true,
+        },
+      },
     },
     plugins: [
       webpackConfigEnv.analyze
@@ -90,29 +111,25 @@ module.exports = (webpackConfigEnv, argv) => {
               mode: "write-references",
             },
           }),
+      new HtmlWebpackPlugin({
+        template: "src/index.ejs",
+        templateParameters: {
+          isLocal: webpackConfigEnv && webpackConfigEnv.isLocal,
+          orgName,
+        },
+      }),
       new ModuleFederationPlugin({
         name: projectName,
-        filename: `${filename}-remote.js`,
         library: { type: "var", name: projectName },
-        exposes: {
-          ".": `./src/IL-classification`,
+        remotes: {
+          "@IL/classification": webpackLoadRemote("classification", 3001),
+          // "@my-org/reports": webpackLoadRemote("reports", 3003),
         },
-        remotes: {},
-        shared: {
-          ...dependencies,
-          react: {
-            singleton: true,
-            requiredVersion: dependencies["react"],
-          },
-          "react-dom": {
-            singleton: true,
-            requiredVersion: dependencies["react-dom"],
-          },
-        },
+        shared: {},
       }),
     ].filter(Boolean),
     resolve: {
-      extensions: [".mjs", ".js", ".jsx", ".wasm", ".json", ".ts", ".tsx"],
+      extensions: [".mjs", ".js", ".jsx", ".wasm", ".json", ".ts"],
     },
   };
 };
