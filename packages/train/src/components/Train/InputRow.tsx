@@ -9,6 +9,7 @@ import {
   Select,
   TableCell,
   SelectChangeEvent,
+  FormHelperText,
 } from "@mui/material";
 import react, { useEffect, useState } from "react";
 import { ITrainCar } from "../../types/TrainCar";
@@ -16,8 +17,8 @@ import { DestinationService } from "../../api/DestinationService";
 import { ReceiverService } from "../../api/ReceiverService";
 
 interface Classification {
-  name: string
-  classification: number 
+  name: string;
+  classification: number;
 }
 
 interface InputRowProps {
@@ -34,6 +35,10 @@ const InputRow = ({ onAdd }: InputRowProps) => {
     classificationTrack: undefined,
   });
 
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isDestinationValid, setIsDestinationValid] = useState(true);
+  const [isReceiverValid, setIsReceiverValid] = useState(true);
+
   useEffect(() => {
     (async () => {
       const result = await DestinationService();
@@ -46,8 +51,14 @@ const InputRow = ({ onAdd }: InputRowProps) => {
       setReceiver(data);
     })();
 
-    return () => {}
+    return () => {};
   }, []);
+
+  useEffect(() => {
+    !(trainCar.name.trim() == "") && setIsNameValid(true);
+    !(trainCar.destination.trim() == "") && setIsDestinationValid(true);
+    !(trainCar.receiver.trim() == "") && setIsReceiverValid(true);
+  }, [trainCar]);
 
   const handleChangeName = (event: any) => {
     setTrainCar((prevState) => ({ ...prevState, name: event.target.value }));
@@ -67,7 +78,14 @@ const InputRow = ({ onAdd }: InputRowProps) => {
   };
 
   const handleAdd = () => {
-    onAdd(`${Math.random()}`, trainCar);
+    const name = trainCar.name.trim() == "";
+    const destination = trainCar.destination.trim() == "";
+    const receiver = trainCar.receiver.trim() == "";
+
+    name && setIsNameValid(false);
+    destination && setIsDestinationValid(false);
+    receiver && setIsReceiverValid(false);
+    !(name || destination || receiver) && onAdd(`${Math.random()}`, trainCar);
   };
 
   return (
@@ -79,10 +97,11 @@ const InputRow = ({ onAdd }: InputRowProps) => {
           variant="outlined"
           onChange={handleChangeName}
           value={trainCar.name}
+          error={!isNameValid}
         />
       </TableCell>
       <TableCell>
-        <FormControl fullWidth>
+        <FormControl fullWidth error={!isDestinationValid}>
           <Select
             id="destination"
             label="Destination"
@@ -99,7 +118,7 @@ const InputRow = ({ onAdd }: InputRowProps) => {
         </FormControl>
       </TableCell>
       <TableCell>
-        <FormControl fullWidth>
+        <FormControl fullWidth error={!isReceiverValid}>
           <Select
             id="receiver"
             label="Receiver"
