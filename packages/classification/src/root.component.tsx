@@ -1,3 +1,6 @@
+import ClassificationComponent from "./components/ClassificationComponent";
+
 export default function Root(props) {
-  return <section>{props.name} is mounted!</section>;
+  //return <ClassificationComponent type={props.type}/>;
+  return <ClassificationComponent type={"DESTINATION"}/>;
 }
