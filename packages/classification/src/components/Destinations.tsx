@@ -2,14 +2,12 @@ import {Classification} from "../../types/Classification";
 import React, {useEffect, useState} from "react";
 import Axios from "axios";
 
-const ClassificationComponent = (props: {type: string}) => {
+const Destinations = () => {
+    const type = 'DESTINATION'
     const [classifications, setClassifications] = useState<Classification[]>([]);
 
     useEffect(() => {
-        if (props.type !== 'DESTINATION' && props.type !== 'RECEIVER') {
-            console.error(`${props.type} is not a valid type`)
-        }
-        const uri = props.type === 'DESTINATION'? 'http://localhost:8080/destination': 'http://localhost:8080/receiver';
+        const uri = type === 'DESTINATION'? 'http://localhost:8080/destination': 'http://localhost:8080/receiver';
         Axios({url: uri})
             .then(res => setClassifications(res.data))
             .catch(err => console.error(err));
@@ -17,7 +15,7 @@ const ClassificationComponent = (props: {type: string}) => {
 
     return (
         <div>
-            <h1>{props.type}</h1>
+            <h1>{type}</h1>
             {classifications.map((classification) => (
                 <div key={classification.id}>
                     <h2>{classification.name} - {classification.classification}</h2>
@@ -29,4 +27,4 @@ const ClassificationComponent = (props: {type: string}) => {
 
 }
 
-export default ClassificationComponent;
+export default Destinations;
