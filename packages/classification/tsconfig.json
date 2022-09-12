@@ -2,7 +2,8 @@
   "extends": "ts-config-single-spa",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "declarationDir": "dist"
+    "declarationDir": "dist",
+    "allowSyntheticDefaultImports": true
   },
   "files": ["src/IL-classification.tsx"],
   "include": ["src/**/*"],
