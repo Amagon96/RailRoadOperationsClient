@@ -11,7 +11,11 @@ export default function Root(props) {
   
   return (
   <BrowserRouter>
-    <Route path="/destinations" element={<Destinations></Destinations>}/>
+    <Routes>
+      <Route path="/" element={<h1>Hi!</h1>} />
+      <Route path="destinations" element={<Destinations></Destinations>}/>
+      <Route path="receivers" element={<ClassificationComponent type="RECEIVER"/>}/>
+    </Routes>
   </BrowserRouter>
   );
 }
