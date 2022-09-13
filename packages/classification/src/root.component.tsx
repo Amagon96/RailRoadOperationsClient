@@ -1,6 +1,11 @@
-import ClassificationComponent from "./components/ClassificationComponent";
+import CssBaseline from "@mui/material/CssBaseline";
+import { Classification } from "./pages";
 
-export default function Root(props) {
-  //return <ClassificationComponent type={props.type}/>;
-  return <ClassificationComponent type={"DESTINATION"}/>;
+export default function Root() {
+  return (
+    <>
+      <CssBaseline />
+      <Classification />
+    </>
+  );
 }
