@@ -9,7 +9,7 @@ const ClassificationComponent = (props: {type: string}) => {
         if (props.type !== 'DESTINATION' && props.type !== 'RECEIVER') {
             console.error(`${props.type} is not a valid type`)
         }
-        const uri = props.type === 'DESTINATION'? 'http://localhost:8080/destinations': 'http://localhost:8080/receivers';
+        const uri = props.type === 'DESTINATION'? 'http://localhost:8080/destination': 'http://localhost:8080/receiver';
         Axios({url: uri})
             .then(res => setClassifications(res.data))
             .catch(err => console.error(err));
