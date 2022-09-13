@@ -8,6 +8,7 @@ import microfrontendLayout from "./microfrontend-layout.html";
 
 const remotes = {
   classification: import("@IL/classification"),
+  train: import("@IL/train")
 };
 
 const routes = constructRoutes(microfrontendLayout);

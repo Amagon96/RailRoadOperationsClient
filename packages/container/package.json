@@ -1,5 +1,6 @@
 {
   "name": "@IL/root-config",
+  "version": "1.0.0",
   "scripts": {
     "start": "webpack serve --port 3000 --env isLocal",
     "lint": "eslint src --ext js,ts,tsx",
