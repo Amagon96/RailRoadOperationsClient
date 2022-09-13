@@ -136,7 +136,7 @@ const InputRow = ({ onAdd }: InputRowProps) => {
         </FormControl>
       </TableCell>
       <TableCell>
-        <Button variant="contained" onClick={handleAdd}>
+        <Button color="success" variant="contained" onClick={handleAdd}>
           <AddIcon/>
         </Button>
       </TableCell>

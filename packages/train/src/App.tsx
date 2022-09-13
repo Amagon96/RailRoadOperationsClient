@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./App.css"
 import InputCard from "./components/Train/InputCard";
 import OutputCard from "./components/Train/OutputCard";
 import { ITrainCar } from "./types/TrainCar";
+import { Box, Typography } from "@mui/material"
 
 function App() {
 
@@ -13,12 +13,12 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Enter a train configuration</h1>
+    <Box className="App">
+      <Typography variant="h5" align="center" sx={{paddingY:"25px", fontWeight:"bold"}}>Enter a train configuration</Typography>
       <InputCard onSort={handleSort}/>
-      <h1>Sorted train</h1>
+      <Typography variant="h5" align="center" sx={{paddingY:"25px", fontWeight:"bold"}}>Sorted train</Typography>
       <OutputCard carList={sortedTrain}/>
-    </div>
+    </Box>
   );
 }
 
