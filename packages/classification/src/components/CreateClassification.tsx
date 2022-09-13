@@ -19,10 +19,8 @@ const CreateClassification = (props: {type: string}) => {
       console.error(`${props.type} is not a valid type`)
     }
 
-    Axios({url: uri})
-      .then(res => setClassifications(res.data))
-      .catch(err => console.error(err));
-  console.log(classifications);
+    fetchData();
+    console.log(classifications);
   
   }, [setClassifications]);
 
@@ -34,7 +32,7 @@ const CreateClassification = (props: {type: string}) => {
   }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    //event.preventDefault();
 
     const classification: Classification = {
       name: classificationState.name,
@@ -48,13 +46,20 @@ const CreateClassification = (props: {type: string}) => {
         .then(res => setClassificationState(res.data))
         .catch(err => console.error(err));
       
-      Axios({url: uri})
-        .then(res => setClassifications(res.data))
-        .catch(err => console.error(err));
+        fetchData()
       console.log(classificationState);
     } catch (e) {
       alert(e)
     }
+  }
+
+  const fetchData = () => {
+    Axios({url: uri})
+    .then(res => {
+      console.log("Fetching Data");
+      setClassifications(res.data);
+    })
+    .catch(err => console.error(err));
   }
 
   return (

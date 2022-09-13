@@ -14,7 +14,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "lerna": "^5.5.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.4.0"
   },
   "dependencies": {
     "uuid": "^9.0.0"
