@@ -14,9 +14,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Input</h1>
+      <h1>Enter a train configuration</h1>
       <InputCard onSort={handleSort}/>
-      <h1>Output</h1>
+      <h1>Sorted train</h1>
       <OutputCard carList={sortedTrain}/>
     </div>
   );

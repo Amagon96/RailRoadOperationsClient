@@ -15,6 +15,7 @@ import react, { useEffect, useState } from "react";
 import { ITrainCar } from "../../types/TrainCar";
 import { DestinationService } from "../../api/DestinationService";
 import { ReceiverService } from "../../api/ReceiverService";
+import AddIcon from '@mui/icons-material/Add';
 
 interface Classification {
   name: string;
@@ -135,8 +136,8 @@ const InputRow = ({ onAdd }: InputRowProps) => {
         </FormControl>
       </TableCell>
       <TableCell>
-        <Button variant="outlined" onClick={handleAdd}>
-          Add
+        <Button variant="contained" onClick={handleAdd}>
+          <AddIcon/>
         </Button>
       </TableCell>
     </TableRow>
