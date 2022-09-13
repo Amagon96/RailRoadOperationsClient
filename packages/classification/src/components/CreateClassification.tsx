@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Classification } from "../../types/Classification";
 import {v4 as uuidv4} from 'uuid';
 import Axios from "axios";
@@ -11,6 +11,20 @@ const CreateClassification = (props: {type: string}) => {
     id: "",
     type: props.type
   });
+  const [classifications, setClassifications] = useState<Classification[]>([]);
+  const uri = props.type === 'DESTINATION' ? 'http://localhost:8080/destination': 'http://localhost:8080/receiver';
+
+  useEffect(() => {
+    if (props.type !== 'DESTINATION' && props.type !== 'RECEIVER') {
+      console.error(`${props.type} is not a valid type`)
+    }
+
+    Axios({url: uri})
+      .then(res => setClassifications(res.data))
+      .catch(err => console.error(err));
+  console.log(classifications);
+  
+  }, [setClassifications]);
 
   const handleChange = (event) => {
     setClassificationState(prevState => ({
@@ -29,11 +43,13 @@ const CreateClassification = (props: {type: string}) => {
       id: uuidv4()
     };
 
-    const uri = props.type === 'DESTINATION'? 'http://localhost:8080/destination': 'http://localhost:8080/receiver';
-
     try {
       Axios.post(uri, classification)
         .then(res => setClassificationState(res.data))
+        .catch(err => console.error(err));
+      
+      Axios({url: uri})
+        .then(res => setClassifications(res.data))
         .catch(err => console.error(err));
       console.log(classificationState);
     } catch (e) {
@@ -43,7 +59,7 @@ const CreateClassification = (props: {type: string}) => {
 
   return (
     <div>
-      <ClassificationComponent type={props.type}/>
+      <ClassificationComponent type={props.type} classifications={classifications}/>
       <form onSubmit={handleSubmit}>
         <div className={"form-input"}>
           <input type={"text"} name={"name"} value={classificationState.name} onChange={handleChange} placeholder={"Name"}/>
