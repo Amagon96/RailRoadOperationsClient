@@ -10,7 +10,9 @@ const remotes = {
   // @ts-ignore
   classification: import("@IL/classification"),
   // @ts-ignore
-  train: import("@IL/train")
+  train: import("@IL/train"),
+  // @ts-ignore
+  header: import("@IL/header")
 };
 
 const routes = constructRoutes(microfrontendLayout);
