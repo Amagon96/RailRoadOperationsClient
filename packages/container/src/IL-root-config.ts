@@ -7,6 +7,7 @@ import {
 import microfrontendLayout from "./microfrontend-layout.html";
 
 const remotes = {
+  // @ts-ignore
   classification: import("@IL/classification"),
 };
 
