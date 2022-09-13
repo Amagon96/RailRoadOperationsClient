@@ -11,9 +11,9 @@ export default function Root(props) {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<h1>Hi!</h1>} />
-          <Route path="/destinations" element={<CreateClassification type="DESTINATION"/>}/>
-          <Route path="/receivers" element={<CreateClassification type="RECEIVER"/>}/>
+          <Route path="/dashboard" element={<h1>Hi!</h1>} />
+          <Route path="/dashboard/destinations" element={<CreateClassification type="DESTINATION"/>}/>
+          <Route path="/dashboard/receivers" element={<CreateClassification type="RECEIVER"/>}/>
         </Routes>
       </BrowserRouter>
   );

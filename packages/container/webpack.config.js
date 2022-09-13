@@ -124,6 +124,7 @@ module.exports = (webpackConfigEnv, argv) => {
         remotes: {
           "@IL/classification": webpackLoadRemote("classification", 3001),
           "@IL/train": webpackLoadRemote("train", 3002),
+          "@IL/header": webpackLoadRemote("header", 3003),
           // "@my-org/reports": webpackLoadRemote("reports", 3003),
         },
         shared: {},
