@@ -1,5 +1,5 @@
-import { Button, TableCell } from "@mui/material";
-import { Box } from "@mui/system";
+import Button from "@mui/material/Button";
+import TableCell from "@mui/material/TableCell";
 import React from "react";
 import { ITrainCar } from "../../types/TrainCar";
 import DeleteIcon from '@mui/icons-material/Delete';

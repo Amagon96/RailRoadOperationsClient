@@ -1,15 +1,13 @@
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
 import react, { useState } from "react";
-import InputRow from "./InputRow";
-import {
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  Paper,
-} from "@mui/material";
 import { TrainSort } from "../../api/TrainSortService";
 import { ITrainCar } from "../../types/TrainCar";
 import CarList from "./CarList";
+import InputRow from "./InputRow";
 import TableLabel from "./TableLabel";
 
 interface InputCardProps{

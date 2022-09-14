@@ -2,7 +2,10 @@ import {Classification} from "../../types/Classification";
 import React, {useCallback, useEffect, useState} from "react";
 import Axios from "axios";
 import ClassificationItem from "./ClassificationItem";
-import { TableRow, TableContainer, Grid, Table } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableRow from "@mui/material/TableRow";
 
 
 const ClassificationComponent = (props: { type: string, classifications: Array<Classification>}) => {
