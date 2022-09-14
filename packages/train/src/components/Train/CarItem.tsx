@@ -29,10 +29,10 @@ const CarItem = ({
 
   return (
     <>
-      <TableCell>{name}</TableCell>
-      <TableCell>{destination}</TableCell>
-      <TableCell>{receiver}</TableCell>
-      <TableCell>
+      <TableCell align="center">{name}</TableCell>
+      <TableCell align="center">{destination}</TableCell>
+      <TableCell align="center">{receiver}</TableCell>
+      <TableCell align="center">
         {isOutput ? (
           <p>{classificationTrack}</p>
         ) : (

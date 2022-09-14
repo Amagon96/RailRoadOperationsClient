@@ -92,6 +92,7 @@ const InputRow = ({ onAdd }: InputRowProps) => {
   return (
     <TableRow>
       <TableCell>
+        <FormControl fullWidth>
         <TextField
           id="name-basic"
           label="Name"
@@ -100,6 +101,7 @@ const InputRow = ({ onAdd }: InputRowProps) => {
           value={trainCar.name}
           error={!isNameValid}
         />
+        </FormControl>
       </TableCell>
       <TableCell>
         <FormControl fullWidth error={!isDestinationValid}>
@@ -135,7 +137,7 @@ const InputRow = ({ onAdd }: InputRowProps) => {
           </Select>
         </FormControl>
       </TableCell>
-      <TableCell>
+      <TableCell align="center">
         <Button color="success" variant="contained" onClick={handleAdd}>
           <AddIcon/>
         </Button>
