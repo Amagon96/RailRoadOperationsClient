@@ -45,7 +45,7 @@ module.exports = (webpackConfigEnv, argv) => {
           test: /\.css$/i,
           type: "asset/source",
           use: ["style-loader", "css-loader"]
-        },
+        }
       ],
     },
     devtool: "source-map",

@@ -2,6 +2,7 @@ import { Button, TableCell } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { ITrainCar } from "../../types/TrainCar";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface CarItemProps {
   id: string;
@@ -28,15 +29,15 @@ const CarItem = ({
 
   return (
     <>
-      <TableCell>{name}</TableCell>
-      <TableCell>{destination}</TableCell>
-      <TableCell>{receiver}</TableCell>
-      <TableCell>
+      <TableCell align="center">{name}</TableCell>
+      <TableCell align="center">{destination}</TableCell>
+      <TableCell align="center">{receiver}</TableCell>
+      <TableCell align="center">
         {isOutput ? (
           <p>{classificationTrack}</p>
         ) : (
-          <Button variant="outlined" color="error" onClick={handleRemove}>
-            Remove
+          <Button variant="contained" color="error" onClick={handleRemove}>
+            <DeleteIcon/>
           </Button>
         )}
       </TableCell>
