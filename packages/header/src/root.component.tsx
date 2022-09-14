@@ -16,7 +16,8 @@ export default function Links() {
         <Toolbar>
           <Typography variant="h5" sx={{flexGrow:1}}>Railroad Operations</Typography>
           <Button color="inherit" href="/train">Train</Button>
-          <Button color="inherit" href="/dashboard">Classification</Button>
+          <Button color="inherit" href="/dashboard/destinations">Destinations</Button>
+          <Button color="inherit" href="/dashboard/receivers">Receivers</Button>
         </Toolbar>
       </AppBar>
     </Box>
