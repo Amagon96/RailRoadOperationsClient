@@ -29,18 +29,3 @@ applications.forEach(registerApplication);
 layoutEngine.activate();
 start();
 
-// registerApplication(
-//   "classification",
-//   // @ts-ignore
-//   () => import("@IL/classification"),
-//   (location) => location.pathname.startsWith("/dashboard")
-// );
-
-// registerApplication(
-//   "reports",
-//   // @ts-ignore
-//   () => import("@my-org/reports"),
-//   (location) => location.pathname.startsWith("/reports")
-// );
-
-start();
