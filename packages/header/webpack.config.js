@@ -1,3 +1,6 @@
+const { merge } = require("webpack-merge");
+const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
+
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
@@ -5,42 +8,14 @@ const dependencies = require("./package.json").dependencies;
 const path = require("path");
 
 module.exports = (webpackConfigEnv, argv) => {
-  // const defaultConfig = singleSpaDefaults({
-  //   orgName: "IL",
-  //   projectName: "classification",
-  //   webpackConfigEnv,
-  //   argv,
-  // });
-  // console.log(webpackConfigEnv)
-  // console.log(argv)
-  // console.log(defaultConfig)
-
-  // return merge(defaultConfig, {
-  //   output: {
-  //     publicPath: 'http://localhost:3001/',
-  //   },
-  //   // modify the webpack config however you'd like to by adding to this object
-  //   plugins: [
-  //     new ModuleFederationPlugin({
-  //       name: 'classification',
-  //       library: { type: 'var', name: 'classification' },
-  //       filename: 'dashboard-remote.js',
-  //       remotes: {},
-  //       exposes: {
-  //         ".": './src/IL-classification'
-  //       },
-  //       shared: { 'react': { singleton: true }, 'react-dom': {singleton:true}, 'single-spa-react':{singleton:true}},
-  //     }),
-  //   ]
-  // });
   const orgName = "IL";
-  const projectName = "classification";
+  const projectName = "header";
   const filename = `${orgName}-${projectName}`;
   const isProduction = argv.p || argv.mode === "production";
 
   return {
     mode: isProduction ? "production" : "development",
-    entry: path.resolve(process.cwd(), `src/IL-classification`),
+    entry: path.resolve(process.cwd(), `src/IL-header`),
     output: {
       filename: `${filename}.js`,
       path: path.resolve(process.cwd(), "dist"),
@@ -66,11 +41,16 @@ module.exports = (webpackConfigEnv, argv) => {
           exclude: [/node_modules/, /\.vue\.html$/],
           type: "asset/source",
         },
+        {
+          test: /\.css$/i,
+          type: "asset/source",
+          use: ["style-loader", "css-loader"]
+        }
       ],
     },
     devtool: "source-map",
     devServer: {
-      port: 3001,
+      port: 3003,
       historyApiFallback: true,
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -95,7 +75,7 @@ module.exports = (webpackConfigEnv, argv) => {
         filename: `${filename}-remote.js`,
         library: { type: "var", name: projectName },
         exposes: {
-          ".": `./src/IL-classification`,
+          ".": `./src/IL-header`,
         },
         remotes: {},
         shared: {
