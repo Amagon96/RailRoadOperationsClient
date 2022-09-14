@@ -13,10 +13,10 @@ const TableLabel = ({ onSort, isOutput }: TableLabelProps) => {
 
   return (
     <TableRow sx={{backgroundColor:"skyblue"}}>
-      <TableCell sx={{fontWeight:"bold", fontSize:20}}>Name</TableCell>
-      <TableCell sx={{fontWeight:"bold", fontSize:20}}>Destination</TableCell>
-      <TableCell sx={{fontWeight:"bold", fontSize:20}}>Receiver</TableCell>
-      <TableCell sx={{fontWeight:"bold", fontSize:20}}>
+      <TableCell align="center" sx={{fontWeight:"bold", fontSize:20}}>Name</TableCell>
+      <TableCell align="center" sx={{fontWeight:"bold", fontSize:20}}>Destination</TableCell>
+      <TableCell align="center" sx={{fontWeight:"bold", fontSize:20}}>Receiver</TableCell>
+      <TableCell align="center" sx={{fontWeight:"bold", fontSize:20}}>
         {isOutput ? (
           "Classification Track"
         ) : (
