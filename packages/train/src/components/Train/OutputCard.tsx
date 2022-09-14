@@ -11,7 +11,7 @@ interface OutputCardProps{
 
 function OutputCard({carList}:OutputCardProps) {
   return (
-    <TableContainer component={Paper} sx={{ margin: "25px" }}>
+    <TableContainer component={Paper} sx={{ margin: "25px", width:"auto" }}>
       <Table>
         <TableHead>
         <TableLabel isOutput={true} onSort={()=>new Promise(()=> undefined )}/>

@@ -11,6 +11,7 @@ import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
+import AddIcon from '@mui/icons-material/Add';
 
 interface Classification {
   name: string;
@@ -87,6 +88,7 @@ const InputRow = ({ onAdd }: InputRowProps) => {
   return (
     <TableRow>
       <TableCell>
+        <FormControl fullWidth>
         <TextField
           id="name-basic"
           label="Name"
@@ -95,6 +97,7 @@ const InputRow = ({ onAdd }: InputRowProps) => {
           value={trainCar.name}
           error={!isNameValid}
         />
+        </FormControl>
       </TableCell>
       <TableCell>
         <FormControl fullWidth error={!isDestinationValid}>
@@ -130,9 +133,9 @@ const InputRow = ({ onAdd }: InputRowProps) => {
           </Select>
         </FormControl>
       </TableCell>
-      <TableCell>
-        <Button variant="outlined" onClick={handleAdd}>
-          Add
+      <TableCell align="center">
+        <Button color="success" variant="contained" onClick={handleAdd}>
+          <AddIcon/>
         </Button>
       </TableCell>
     </TableRow>

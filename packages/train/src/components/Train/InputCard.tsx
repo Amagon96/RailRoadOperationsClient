@@ -42,8 +42,8 @@ function InputCard({onSort}:InputCardProps) {
   };
 
   return (
-    <TableContainer component={Paper} sx={{ margin: "25px" }}>
-      <Table>
+    <TableContainer component={Paper} sx={{ margin: "25px" , width:"auto"}}>
+      <Table >
         <TableHead>
           <TableLabel isOutput={false} onSort={handleSort} />
         </TableHead>
