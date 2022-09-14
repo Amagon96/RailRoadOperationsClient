@@ -1,4 +1,6 @@
-import { Button, TableCell } from "@mui/material";
+import Button from "@mui/material/Button";
+import TableCell from "@mui/material/TableCell";
+
 
 interface ClassificationItemProps {
   id: string;
