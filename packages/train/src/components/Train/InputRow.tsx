@@ -1,20 +1,16 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  TextField,
-  TableRow,
-  Select,
-  TableCell,
-  SelectChangeEvent,
-  FormHelperText,
-} from "@mui/material";
+
 import react, { useEffect, useState } from "react";
 import { ITrainCar } from "../../types/TrainCar";
 import { DestinationService } from "../../api/DestinationService";
 import { ReceiverService } from "../../api/ReceiverService";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 
 interface Classification {
