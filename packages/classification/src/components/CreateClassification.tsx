@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Classification } from "../../types/Classification";
+import { ClassificationModel } from "../api/types/classification-interface";
 import {v4 as uuidv4} from 'uuid';
 import Axios from "axios";
 import ClassificationComponent from "./ClassificationComponent";
@@ -11,7 +11,7 @@ const CreateClassification = (props: {type: string}) => {
     id: "",
     type: props.type
   });
-  const [classifications, setClassifications] = useState<Classification[]>([]);
+  const [classifications, setClassifications] = useState<ClassificationModel[]>([]);
   const uri = props.type === 'DESTINATION' ? 'http://localhost:8080/destination': 'http://localhost:8080/receiver';
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const CreateClassification = (props: {type: string}) => {
   const handleSubmit = (event) => {
     //event.preventDefault();
 
-    const classification: Classification = {
+    const classification: ClassificationModel = {
       name: classificationState.name,
       type: classificationState.type,
       classification: classificationState.classification,

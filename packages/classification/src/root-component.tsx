@@ -5,7 +5,7 @@ import CreateClassification from "./components/CreateClassification";
 import { Classification } from "./pages";
 
 
-export default function Root(props) {
+export default function Root() {
   return (
     <>
       <CssBaseline />
@@ -18,7 +18,7 @@ export default function Root(props) {
           />
           <Route
             path="/dashboard/receivers"
-            element={<CreateClassification type="RECEIVER" />}
+            element={<Classification type="RECEIVER" />}
           />
         </Routes>
       </BrowserRouter>

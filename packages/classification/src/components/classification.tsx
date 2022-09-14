@@ -1,9 +1,9 @@
-import { Classification } from "../../types/Classification";
+import { ClassificationModel } from "../api/types/classification-interface";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
 export const ClassificationComponent = (props: { type: string }) => {
-  const [classifications, setClassifications] = useState<Classification[]>([]);
+  const [classifications, setClassifications] = useState<ClassificationModel[]>([]);
 
   useEffect(() => {
     if (props.type !== "DESTINATION" && props.type !== "RECEIVER") {
