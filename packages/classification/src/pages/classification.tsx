@@ -17,7 +17,12 @@ import {
   CreateClassification,
   UpdateClassifications,
 } from "../components";
-import { createDestination, deleteDestination, getDestinations, updateDestination } from "../api/destinations-service";
+import {
+  createDestination,
+  deleteDestination,
+  getDestinations,
+  updateDestination,
+} from "../api/destinations-service";
 
 type classificationAlias = "RECEIVER" | "DESTINATION";
 
@@ -36,10 +41,8 @@ export function Classification({ type }: ClassificationInterfaceProps) {
     }
     if (type === "DESTINATION") {
       await deleteDestination(id);
-    } 
-    setClassificationList(
-      classificationList.filter((item) => item.id !== id)
-    );
+    }
+    setClassificationList(classificationList.filter((item) => item.id !== id));
   };
 
   const updateClassification = () => {
@@ -53,10 +56,10 @@ export function Classification({ type }: ClassificationInterfaceProps) {
 
   const addClassification = (classification: CreateClassificationModel) => {
     if (type === "RECEIVER") {
-      createReceiver(classification).then(() => getClassifications()); 
+      createReceiver(classification).then(() => getClassifications());
     }
     if (type === "DESTINATION") {
-      createDestination(classification).then(() => getClassifications()); 
+      createDestination(classification).then(() => getClassifications());
     }
   };
 
@@ -66,7 +69,7 @@ export function Classification({ type }: ClassificationInterfaceProps) {
         setClassificationList(data);
       });
     }
-    if(type === "DESTINATION") {
+    if (type === "DESTINATION") {
       getDestinations().then(({ data }) => {
         setClassificationList(data);
       });
@@ -94,6 +97,11 @@ export function Classification({ type }: ClassificationInterfaceProps) {
           gap: "30px",
         }}
       >
+        <CreateClassification addClassification={addClassification}>
+          <Typography variant="h6">
+            Create a new {type.toLowerCase()}
+          </Typography>
+        </CreateClassification>
         <Paper>
           <Stack
             direction="row"
@@ -116,7 +124,9 @@ export function Classification({ type }: ClassificationInterfaceProps) {
             >
               <LocalShippingIcon sx={{ color: "#FFF" }} />
             </Box>
-            <Typography variant="h6">{type}</Typography>
+            <Typography variant="h6" textTransform="capitalize">
+              {type.toLowerCase()}s
+            </Typography>
           </Stack>
           <Divider />
           <UpdateClassifications>
@@ -130,11 +140,6 @@ export function Classification({ type }: ClassificationInterfaceProps) {
             ))}
           </UpdateClassifications>
         </Paper>
-        <CreateClassification addClassification={addClassification}>
-          <Typography variant="h6">
-            Create a new {type.toLowerCase()}
-          </Typography>
-        </CreateClassification>
       </Stack>
     </Box>
   );
