@@ -89,7 +89,6 @@ export function ClassificationItem({
             <TextField
               value={values.classification}
               fullWidth
-              type="number"
               onChange={onClassificationChange}
             />
           </Box>
