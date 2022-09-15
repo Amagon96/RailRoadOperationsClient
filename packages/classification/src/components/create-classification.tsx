@@ -31,6 +31,11 @@ export function CreateClassification({
 
   const onClassificationChange = (event: FormEvent<{ value: string }>) => {
     const classificationValue = event.currentTarget.value;
+    const onlyNumbersExpression: RegExp = /^\d*$/;
+
+    //If the input contains any non-numeric character ignore
+    if (!classificationValue.match(onlyNumbersExpression)) return;
+
     setClassification({
       ...classification,
       classification: Number(classificationValue),
@@ -65,11 +70,7 @@ export function CreateClassification({
           <TextField
             value={classification.classification}
             onChange={onClassificationChange}
-            type="number"
             fullWidth
-            InputProps={{
-              inputProps: { min: 1 },
-            }}
           />
         </Stack>
         <Box

@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography/Typography";
 import TextField from "@mui/material/TextField/TextField";
 import IconButton from "@mui/material/IconButton/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { ClassificationModel } from "../api/types";
@@ -40,10 +40,6 @@ export function ClassificationItem({
     disableEdition();
   };
 
-  const onCancel = () => {
-    disableEdition();
-  };
-
   const onDelete = () => {
     removeItem(values.id);
   };
@@ -57,10 +53,15 @@ export function ClassificationItem({
   };
 
   const onClassificationChange = (event: FormEvent<{ value: string }>) => {
-    const classification = Number(event.currentTarget?.value);
+    const classification = event.currentTarget?.value;
+    const onlyNumbersExpression: RegExp = /^\d*$/;
+
+    //If the input contains any non-numeric character ignore
+    if (!classification.match(onlyNumbersExpression)) return;
+
     setValues({
       ...values,
-      classification,
+      classification: Number(classification),
     });
   };
 
