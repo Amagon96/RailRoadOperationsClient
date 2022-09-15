@@ -1,5 +1,9 @@
 import react from "react";
-import { Box, Card, CardContent, Divider, Paper, Stack, Table, TableBody, TableContainer, TableHead, Typography } from "@mui/material";
+import Box from '@mui/material/Box/Box';
+import Divider from '@mui/material/Divider/Divider';
+import Paper from '@mui/material/Paper/Paper';
+import Stack from '@mui/material/Stack/Stack';
+import Typography from '@mui/material/Typography/Typography';
 import { ITrainCar } from "../../types/TrainCar";
 import SortIcon from '@mui/icons-material/Sort';
 import { OutputLabel } from "./output-label";

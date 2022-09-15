@@ -7,10 +7,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select/Select";
 import Stack from "@mui/material/Stack/Stack";
 import TextField from "@mui/material/TextField/TextField";
 import AddIcon from "@mui/icons-material/Add";
-import CheckIcon from "@mui/icons-material/Check";
-import CancelIcon from "@mui/icons-material/Cancel";
-import React, { FormEvent, useEffect, useState } from "react";
-import { TrainCarValuesInterface } from "./car-item";
+import React, { useEffect, useState } from "react";
 import { ITrainCar } from "../../types/TrainCar";
 
 export interface InputRowProps {

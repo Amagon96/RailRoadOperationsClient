@@ -1,11 +1,6 @@
 import Box from "@mui/material/Box/Box";
-import IconButton from "@mui/material/IconButton/IconButton";
 import Stack from "@mui/material/Stack/Stack";
 import Typography from "@mui/material/Typography/Typography";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import React from "react";
-import { TrainCarValuesInterface } from "../input/car-item";
 import { ITrainCar } from "../../types/TrainCar";
 
 export interface OutputItemProps {

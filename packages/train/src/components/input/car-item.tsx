@@ -1,24 +1,8 @@
 import React, {
-  ChangeEventHandler,
   FormEvent,
-  useState,
-  useEffect,
+  useState
 } from "react";
-import Box from "@mui/material/Box/Box";
-import Stack from "@mui/material/Stack/Stack";
-import Typography from "@mui/material/Typography/Typography";
-import IconButton from "@mui/material/IconButton/IconButton";
-import EditIcon from "@mui/icons-material/Edit";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import TextField from "@mui/material/TextField/TextField";
-import CheckIcon from "@mui/icons-material/Check";
-import CancelIcon from "@mui/icons-material/Cancel";
-import FormControl from "@mui/material/FormControl/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select/Select";
-import MenuItem from "@mui/material/MenuItem/MenuItem";
-import OutlinedInput from "@mui/material/OutlinedInput/OutlinedInput";
-import { DestinationService } from "./../../api/DestinationService";
-import { ReceiverService } from "./../../api/ReceiverService";
+import { SelectChangeEvent } from "@mui/material/Select/Select";
 import { EditRow } from "./edit-row";
 import { InputItem } from "./input-item";
 
