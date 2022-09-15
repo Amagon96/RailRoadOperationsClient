@@ -44,7 +44,7 @@ export function ClassificationItem({
     removeItem(values.id);
   };
 
-  const onItemChange = (event: FormEvent<{ value: string }>) => {
+  const onNameChange = (event: FormEvent<{ value: string }>) => {
     const name = event.currentTarget?.value;
     setValues({
       ...values,
@@ -77,7 +77,7 @@ export function ClassificationItem({
         }}
       >
         <Box sx={{ width: "50%" }}>
-          <TextField value={values.name} fullWidth onChange={onItemChange} />
+          <TextField value={values.name} fullWidth onChange={onNameChange} />
         </Box>
         <Stack
           direction="row"

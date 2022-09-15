@@ -5,14 +5,24 @@ import TextField from "@mui/material/TextField/TextField";
 import Button from "@mui/material/Button/Button";
 import Stack from "@mui/material/Stack/Stack";
 import Box from "@mui/material/Box/Box";
+import Typography from "@mui/material/Typography/Typography";
+
+interface CreateClassificationError {
+  message?: string;
+  hasError: boolean;
+}
 
 export interface CreateClassificationInterface {
   addClassification: (classification: CreateClassificationModel) => void;
+  findDuplicateClassification: (
+    classification: CreateClassificationModel
+  ) => boolean;
   children: ReactChild;
 }
 
 export function CreateClassification({
   addClassification,
+  findDuplicateClassification,
   children,
 }: CreateClassificationInterface): JSX.Element {
   const [classification, setClassification] =
@@ -21,8 +31,13 @@ export function CreateClassification({
       classification: "",
     });
 
+  const [error, setSerror] = useState<CreateClassificationError>({
+    hasError: false,
+  });
+
   const onNameChange = (event: FormEvent<{ value: string }>) => {
     const name = event.currentTarget.value;
+
     setClassification(
       new CreateClassificationModel(name, classification.classification)
     );
@@ -41,9 +56,27 @@ export function CreateClassification({
   };
 
   const onSubmit = () => {
-    if (classification.name.trim() === "") return;
-    if (classification.classification <= 0) return;
+    // Run validations
+    if (
+      classification.name.trim() === "" ||
+      classification.classification <= 0 ||
+      findDuplicateClassification(classification)
+    ) {
+      setSerror({
+        message: "You are trying to create a duplicate classification",
+        hasError: true,
+      });
+      return;
+    }
+    // Reset values and remove error
+    setSerror({
+      hasError: false,
+    });
     addClassification(classification);
+    setClassification({
+      name: "",
+      classification: "",
+    });
   };
 
   return (
@@ -73,6 +106,7 @@ export function CreateClassification({
             placeholder="Classification"
           />
         </Stack>
+        <Typography color="error">{error?.message}</Typography>
         <Box
           sx={{
             marginInlineStart: "auto",
