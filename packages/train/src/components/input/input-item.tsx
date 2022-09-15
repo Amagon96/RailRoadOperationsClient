@@ -44,10 +44,10 @@ export const InputItem = ({
       >
         <Typography lineHeight="40px">{values.receiver}</Typography>
         <Stack direction="row">
-          <IconButton color="primary" onClick={enableEdition}>
+          <IconButton color="primary" onClick={enableEdition} aria-label={"Edit"}>
             <EditIcon />
           </IconButton>
-          <IconButton color="error" onClick={onDelete}>
+          <IconButton color="error" onClick={onDelete} aria-label={"Delete"}>
             <DeleteIcon />
           </IconButton>
         </Stack>
