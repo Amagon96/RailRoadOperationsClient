@@ -3,7 +3,7 @@ import Stack from "@mui/system/Stack/Stack";
 import Box from "@mui/material/Box/Box";
 import Typography from "@mui/material/Typography/Typography";
 
-export function UpdateClassifications({ children }) {
+export function InputLabel({ children }) {
   return (
     <Stack
       sx={{

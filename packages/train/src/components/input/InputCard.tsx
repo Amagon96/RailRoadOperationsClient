@@ -1,22 +1,18 @@
 import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 import { TrainSort } from "../../api/TrainSortService";
 import { ITrainCar } from "../../types/TrainCar";
-import CarList from "./CarList";
-import { ClassificationItem } from "./car-item";
-import InputRow from "./InputRow";
-import TableLabel from "./TableLabel";
+import { CarItem } from "./car-item";
+import {InputRow} from "./input-row";
 import TrainIcon from "@mui/icons-material/Train";
 import Box from "@mui/material/Box/Box";
 import Stack from "@mui/material/Stack/Stack";
 import Divider from "@mui/material/Divider/Divider";
 import Typography from "@mui/material/Typography/Typography";
-import { UpdateClassifications } from "./update-classifications";
-import { Update } from "@mui/icons-material";
+import { InputLabel } from "./input-label";
+import Button from "@mui/material/Button/Button";
+import { DestinationService } from "../../api/DestinationService";
+import { ReceiverService } from "../../api/ReceiverService";
 
 interface InputCardProps {
   onSort: (sortedTrain: ITrainCar[]) => void;
@@ -26,6 +22,23 @@ function InputCard({ onSort }: InputCardProps) {
   const [trainList, setTrainList] = useState<Map<string, ITrainCar>>(
     new Map([])
   );
+  const [destinationOptions, setDestinationOptions] = useState([]);
+  const [receiverOptions, setReceiverOptions] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const result = await DestinationService();
+      const data = result.data;
+      setDestinationOptions(data.map(item=>item.name));
+    })();
+    (async () => {
+      const result = await ReceiverService();
+      const data = result.data;
+      setReceiverOptions(data.map(item=>item.name));
+    })();
+
+    return () => {};
+  }, []);
 
   const handleSort = async () => {
     const result = await TrainSort(trainList);
@@ -54,7 +67,6 @@ function InputCard({ onSort }: InputCardProps) {
       sx={{
         bgcolor: "#F8F9FF",
         width: "100vw",
-        height: "Calc(100vh - 64px)",
         paddingBlock: "30px",
         paddingInline: "50px",
       }}
@@ -88,35 +100,37 @@ function InputCard({ onSort }: InputCardProps) {
             >
               <TrainIcon sx={{ color: "#FFF" }} />
             </Box>
-            <Typography variant="h6">Enter a train configuration</Typography>
+            <Typography sx={{ flex: 1 }} variant="h6">
+              Enter a train configuration
+            </Typography>
+            <Button variant="contained" onClick={handleSort}>
+              Sort
+            </Button>
           </Stack>
           <Divider />
-          <UpdateClassifications>
+          <InputLabel>
+            <InputRow
+              onAdd={handleAdd}
+              destinationOptions={destinationOptions}
+              receiverOptions={receiverOptions}
+            />
             {Array.from(trainList).map(([id, car]) => {
               return (
-              <ClassificationItem
-                key={id}
-                id={id}
-                name={car.name}
-                destination={car.destination}
-                receiver={car.receiver}
-                removeItem={handleRemove}
-              />);
+                <CarItem
+                  key={id}
+                  id={id}
+                  name={car.name}
+                  destination={car.destination}
+                  receiver={car.receiver}
+                  destinationOptions={destinationOptions}
+                  receiverOptions={receiverOptions}
+                  removeItem={handleRemove}
+                />
+              );
             })}
-          </UpdateClassifications>
+          </InputLabel>
         </Paper>
       </Stack>
-      <TableContainer component={Paper} sx={{ margin: "25px", width: "auto" }}>
-        <Table>
-          <TableHead>
-            <TableLabel isOutput={false} onSort={handleSort} />
-          </TableHead>
-          <TableBody>
-            <InputRow onAdd={handleAdd} />
-            <CarList trainList={trainList} onRemove={handleRemove} />
-          </TableBody>
-        </Table>
-      </TableContainer>
     </Box>
   );
 }
