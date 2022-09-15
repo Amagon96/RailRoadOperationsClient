@@ -24,7 +24,7 @@ const resources = {
       "DESTINATION": "Destino",
       "save": "Guardar",
       "name": "Nombre",
-      "classification": "Clasificaiton"
+      "classification": "Clasificación"
     }
   }
 };

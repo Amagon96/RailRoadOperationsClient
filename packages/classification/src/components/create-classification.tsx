@@ -6,6 +6,7 @@ import Button from "@mui/material/Button/Button";
 import Stack from "@mui/material/Stack/Stack";
 import Box from "@mui/material/Box/Box";
 import Typography from "@mui/material/Typography/Typography";
+import { useTranslation } from "react-i18next";
 
 interface CreateClassificationError {
   message?: string;
@@ -25,6 +26,8 @@ export function CreateClassification({
   findDuplicateClassification,
   children,
 }: CreateClassificationInterface): JSX.Element {
+
+  const { t, i18n } = useTranslation();
   const [classification, setClassification] =
     useState<CreateClassificationModel>({
       name: "",
@@ -98,13 +101,13 @@ export function CreateClassification({
             value={classification.name}
             onChange={onNameChange}
             fullWidth
-            placeholder="Name"
+            placeholder={t('name')}
           />
           <TextField
             value={classification.classification}
             onChange={onClassificationChange}
             fullWidth
-            placeholder="Classification"
+            placeholder={t('classification')}
           />
         </Stack>
         <Typography color="error">{error?.message}</Typography>
@@ -121,7 +124,7 @@ export function CreateClassification({
             color="primary"
             fullWidth
           >
-            Save
+            {t('save')}
           </Button>
         </Box>
       </Stack>

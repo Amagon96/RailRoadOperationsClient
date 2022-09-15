@@ -4,21 +4,11 @@ import { Classification } from "./pages";
 import { useTranslation } from "react-i18next";
 import { Suspense } from "react";
 
-const Loader = () => (
-  <div className="App">
-    <div>loading...</div>
-  </div>
-);
-
 export default function Root() {
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = lng => {
-    i18n.changeLanguage(lng);
-  };
-
   return (
-    <Suspense fallback={<Loader />}>
+    <>
       <CssBaseline />
       <BrowserRouter>
         <Routes>
@@ -33,6 +23,6 @@ export default function Root() {
           />
         </Routes>
       </BrowserRouter>
-    </Suspense>
+    </>
   );
 }

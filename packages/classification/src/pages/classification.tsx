@@ -35,10 +35,6 @@ export function Classification({ type }: ClassificationInterfaceProps) {
 
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = lng => {
-    i18n.changeLanguage(lng);
-  };
-
   const [classificationList, setClassificationList] = useState<
     ClassificationModel[]
   >([]);
@@ -95,6 +91,8 @@ export function Classification({ type }: ClassificationInterfaceProps) {
   };
 
   useEffect(() => {
+    //i18n.changeLanguage("en");
+
     getClassifications();
   }, []);
 
