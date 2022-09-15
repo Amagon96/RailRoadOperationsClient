@@ -76,6 +76,16 @@ export function Classification({ type }: ClassificationInterfaceProps) {
     }
   };
 
+  const findDuplicateClassification = (
+    classification: CreateClassificationModel
+  ): boolean => {
+    return classificationList.some(
+      (currentClassification) =>
+        currentClassification.name === classification.name ||
+        currentClassification.classification === classification.classification
+    );
+  };
+
   useEffect(() => {
     getClassifications();
   }, []);
@@ -97,7 +107,10 @@ export function Classification({ type }: ClassificationInterfaceProps) {
           gap: "30px",
         }}
       >
-        <CreateClassification addClassification={addClassification}>
+        <CreateClassification
+          findDuplicateClassification={findDuplicateClassification}
+          addClassification={addClassification}
+        >
           <Typography variant="h6">
             Create a new {type.toLowerCase()}
           </Typography>

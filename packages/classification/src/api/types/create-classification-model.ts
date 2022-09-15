@@ -1,4 +1,9 @@
 export class CreateClassificationModel {
   name?: string;
-  classification?: number;
+  classification?: number | string;
+
+  constructor(name: string, classification: string) {
+    this.name = name;
+    this.classification = parseInt(classification, 10);
+  }
 }

@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography/Typography";
 import TextField from "@mui/material/TextField/TextField";
 import IconButton from "@mui/material/IconButton/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { ClassificationModel } from "../api/types";
@@ -40,15 +40,11 @@ export function ClassificationItem({
     disableEdition();
   };
 
-  const onCancel = () => {
-    disableEdition();
-  };
-
   const onDelete = () => {
     removeItem(values.id);
   };
 
-  const onItemChange = (event: FormEvent<{ value: string }>) => {
+  const onNameChange = (event: FormEvent<{ value: string }>) => {
     const name = event.currentTarget?.value;
     setValues({
       ...values,
@@ -57,10 +53,15 @@ export function ClassificationItem({
   };
 
   const onClassificationChange = (event: FormEvent<{ value: string }>) => {
-    const classification = Number(event.currentTarget?.value);
+    const classification = event.currentTarget?.value;
+    const onlyNumbersExpression: RegExp = /^\d*$/;
+
+    //If the input contains any non-numeric character ignore
+    if (!classification.match(onlyNumbersExpression)) return;
+
     setValues({
       ...values,
-      classification,
+      classification: parseInt(classification, 10),
     });
   };
 
@@ -76,7 +77,7 @@ export function ClassificationItem({
         }}
       >
         <Box sx={{ width: "50%" }}>
-          <TextField value={values.name} fullWidth onChange={onItemChange} />
+          <TextField value={values.name} fullWidth onChange={onNameChange} />
         </Box>
         <Stack
           direction="row"
@@ -88,7 +89,6 @@ export function ClassificationItem({
             <TextField
               value={values.classification}
               fullWidth
-              type="number"
               onChange={onClassificationChange}
             />
           </Box>
