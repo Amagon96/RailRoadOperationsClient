@@ -50,7 +50,7 @@ export function CreateClassification({
 
     setClassification({
       name: classification.name,
-      classification: parseInt(classificationValue),
+      classification: parseInt(classificationValue, 10),
     });
   };
 

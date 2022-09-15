@@ -61,7 +61,7 @@ export function ClassificationItem({
 
     setValues({
       name: classification.name,
-      classification: parseInt(classificationValue),
+      classification: parseInt(classificationValue, 10),
     });
   };
 
