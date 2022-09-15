@@ -53,15 +53,15 @@ export function ClassificationItem({
   };
 
   const onClassificationChange = (event: FormEvent<{ value: string }>) => {
-    const classification = event.currentTarget?.value;
+    const classificationValue = event.currentTarget?.value;
     const onlyNumbersExpression: RegExp = /^\d*$/;
 
     //If the input contains any non-numeric character ignore
-    if (!classification.match(onlyNumbersExpression)) return;
+    if (!classificationValue.match(onlyNumbersExpression)) return;
 
     setValues({
-      ...values,
-      classification: parseInt(classification, 10),
+      name: classification.name,
+      classification: parseInt(classificationValue, 10),
     });
   };
 
@@ -77,7 +77,11 @@ export function ClassificationItem({
         }}
       >
         <Box sx={{ width: "50%" }}>
-          <TextField value={values.name} fullWidth onChange={onNameChange} />
+          <TextField
+            value={values.name || ""}
+            fullWidth
+            onChange={onNameChange}
+          />
         </Box>
         <Stack
           direction="row"
@@ -87,7 +91,7 @@ export function ClassificationItem({
         >
           <Box sx={{ width: "100%" }}>
             <TextField
-              value={values.classification}
+              value={values.classification || ""}
               fullWidth
               onChange={onClassificationChange}
             />
@@ -115,7 +119,7 @@ export function ClassificationItem({
       }}
     >
       <Box sx={{ width: "50%" }}>
-        <Typography lineHeight="40px">{values.name}</Typography>
+        <Typography lineHeight="40px">{values.name  || ''}</Typography>
       </Box>
       <Stack
         direction="row"
@@ -124,7 +128,7 @@ export function ClassificationItem({
           justifyContent: "space-between",
         }}
       >
-        <Typography lineHeight="40px">{values.classification}</Typography>
+        <Typography lineHeight="40px">{values.classification || ""}</Typography>
         <Stack direction="row">
           <IconButton color="primary" onClick={enableEdition}>
             <EditIcon />

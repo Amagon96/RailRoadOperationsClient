@@ -14,22 +14,19 @@ interface CreateClassificationError {
 
 export interface CreateClassificationInterface {
   addClassification: (classification: CreateClassificationModel) => void;
-  findDuplicateClassification: (
-    classification: CreateClassificationModel
-  ) => boolean;
+  findDuplicatedName: (name: string) => boolean;
+  findDuplicatedClassification: (classification: number) => boolean;
   children: ReactChild;
 }
 
 export function CreateClassification({
   addClassification,
-  findDuplicateClassification,
+  findDuplicatedName,
+  findDuplicatedClassification,
   children,
 }: CreateClassificationInterface): JSX.Element {
   const [classification, setClassification] =
-    useState<CreateClassificationModel>({
-      name: "",
-      classification: "",
-    });
+    useState<CreateClassificationModel>({});
 
   const [error, setSerror] = useState<CreateClassificationError>({
     hasError: false,
@@ -51,32 +48,57 @@ export function CreateClassification({
     //If the input contains any non-numeric character ignore
     if (!classificationValue.match(onlyNumbersExpression)) return;
 
-    setClassification(
-      new CreateClassificationModel(classification.name, classificationValue)
-    );
+    setClassification({
+      name: classification.name,
+      classification: parseInt(classificationValue, 10),
+    });
   };
 
   const onSubmit = () => {
     // Run validations
-    if (
-      classification.name.trim() === "" ||
-      classification.classification <= 0 ||
-      findDuplicateClassification(classification)
-    ) {
+    if (classification.name.trim() === "") {
       setSerror({
-        message: "You are trying to create a duplicate classification",
+        message: "You must set a name",
         hasError: true,
       });
       return;
     }
+    if (!classification.classification) {
+      setSerror({
+        message: "You must set a classification",
+        hasError: true,
+      });
+      return;
+    }
+    if (classification.classification <= 0) {
+      setSerror({
+        message: "Invalid classification range",
+        hasError: true,
+      });
+      return;
+    }
+    if (findDuplicatedName(classification.name)) {
+      setSerror({
+        message: "Classification name already exist",
+        hasError: true,
+      });
+      return;
+    }
+    if (findDuplicatedClassification(classification.classification)) {
+      setSerror({
+        message: "Classification value already exist",
+        hasError: true,
+      });
+      return;
+    }
+
     // Reset values and remove error
+    addClassification(classification);
     setSerror({
       hasError: false,
     });
-    addClassification(classification);
     setClassification({
       name: "",
-      classification: "",
     });
   };
 
@@ -95,13 +117,13 @@ export function CreateClassification({
       >
         <Stack direction="row" gap="25px">
           <TextField
-            value={classification.name}
+            value={classification.name || ''}
             onChange={onNameChange}
             fullWidth
             placeholder="Name"
           />
           <TextField
-            value={classification.classification}
+            value={classification.classification || ""}
             onChange={onClassificationChange}
             fullWidth
             placeholder="Classification"

@@ -76,13 +76,16 @@ export function Classification({ type }: ClassificationInterfaceProps) {
     }
   };
 
-  const findDuplicateClassification = (
-    classification: CreateClassificationModel
-  ): boolean => {
+  const findDuplicatedName = (name: string): boolean => {
+    return classificationList.some(
+      (currentClassification) => currentClassification.name === name
+    );
+  };
+
+  const findDuplicatedClassification = (classification: number): boolean => {
     return classificationList.some(
       (currentClassification) =>
-        currentClassification.name === classification.name ||
-        currentClassification.classification === classification.classification
+        currentClassification.classification === classification
     );
   };
 
@@ -108,7 +111,8 @@ export function Classification({ type }: ClassificationInterfaceProps) {
         }}
       >
         <CreateClassification
-          findDuplicateClassification={findDuplicateClassification}
+          findDuplicatedName={findDuplicatedName}
+          findDuplicatedClassification={findDuplicatedClassification}
           addClassification={addClassification}
         >
           <Typography variant="h6">
