@@ -18,15 +18,14 @@ export function CreateClassification({
   const [classification, setClassification] =
     useState<CreateClassificationModel>({
       name: "",
-      classification: 0,
+      classification: "",
     });
 
   const onNameChange = (event: FormEvent<{ value: string }>) => {
     const name = event.currentTarget.value;
-    setClassification({
-      ...classification,
-      name,
-    });
+    setClassification(
+      new CreateClassificationModel(name, classification.classification)
+    );
   };
 
   const onClassificationChange = (event: FormEvent<{ value: string }>) => {
@@ -36,10 +35,9 @@ export function CreateClassification({
     //If the input contains any non-numeric character ignore
     if (!classificationValue.match(onlyNumbersExpression)) return;
 
-    setClassification({
-      ...classification,
-      classification: Number(classificationValue),
-    });
+    setClassification(
+      new CreateClassificationModel(classification.name, classificationValue)
+    );
   };
 
   const onSubmit = () => {
@@ -66,11 +64,13 @@ export function CreateClassification({
             value={classification.name}
             onChange={onNameChange}
             fullWidth
+            placeholder="Name"
           />
           <TextField
             value={classification.classification}
             onChange={onClassificationChange}
             fullWidth
+            placeholder="Classification"
           />
         </Stack>
         <Box
