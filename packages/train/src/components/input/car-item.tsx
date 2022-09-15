@@ -1,10 +1,8 @@
-import React, {
-  FormEvent,
-  useState
-} from "react";
+import React, { FormEvent, useState } from "react";
 import { SelectChangeEvent } from "@mui/material/Select/Select";
 import { EditRow } from "./edit-row";
 import { InputItem } from "./input-item";
+import { ITrainCar } from "../../types/TrainCar";
 
 export interface CarItemProps {
   id: string;
@@ -14,6 +12,7 @@ export interface CarItemProps {
   destinationOptions: string[];
   receiverOptions: string[];
   removeItem: (id: string) => void;
+  updateItem: (id: string, newCar: ITrainCar) => void;
 }
 
 export interface TrainCarValuesInterface {
@@ -30,6 +29,7 @@ export function CarItem({
   destinationOptions,
   receiverOptions,
   removeItem,
+  updateItem,
 }: CarItemProps) {
   const [editing, setEditing] = useState(false);
   const [values, setValues] = useState<TrainCarValuesInterface>({
@@ -48,6 +48,15 @@ export function CarItem({
 
   const onDelete = () => {
     return removeItem(id);
+  };
+
+  const onUpdate = () => {
+    updateItem(id, {
+      name: values.name,
+      destination: values.destination,
+      receiver: values.receiver,
+    });
+    disableEdition();
   };
 
   const onNameChange = (event: FormEvent<{ value: string }>) => {
@@ -79,6 +88,7 @@ export function CarItem({
         onDestinationChange={onDestinationChange}
         onReceiverChange={onReceiverChange}
         disableEdition={disableEdition}
+        onUpdate={onUpdate}
       />
     );
 
