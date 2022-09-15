@@ -120,7 +120,7 @@ export function Classification({ type }: ClassificationInterfaceProps) {
           addClassification={addClassification}
         >
           <Typography variant="h6">
-             {t("Welcome to React") }
+            {t('create')} {t(type).toLowerCase()}
           </Typography>
         </CreateClassification>
         <Paper>

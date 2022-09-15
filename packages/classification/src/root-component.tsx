@@ -22,7 +22,7 @@ export default function Root() {
       <CssBaseline />
       <BrowserRouter>
         <Routes>
-          <Route path="/dashboard" element={<h1>{t("Welcome to RailRoad")}</h1>} />
+          <Route path="/dashboard" element={<h1>{t("welcome")}</h1>} />
           <Route
             path="/dashboard/destinations"
             element={<Classification type="DESTINATION" />}
