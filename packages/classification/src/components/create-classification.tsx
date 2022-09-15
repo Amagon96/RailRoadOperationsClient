@@ -16,6 +16,7 @@ export interface CreateClassificationInterface {
   addClassification: (classification: CreateClassificationModel) => void;
   findDuplicatedName: (name: string) => boolean;
   findDuplicatedClassification: (classification: number) => boolean;
+  classificationType: string,
   children: ReactChild;
 }
 
@@ -23,6 +24,7 @@ export function CreateClassification({
   addClassification,
   findDuplicatedName,
   findDuplicatedClassification,
+  classificationType,
   children,
 }: CreateClassificationInterface): JSX.Element {
   const [classification, setClassification] =
@@ -54,7 +56,7 @@ export function CreateClassification({
     });
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     // Run validations
     if (classification.name.trim() === "") {
       setSerror({
@@ -93,7 +95,7 @@ export function CreateClassification({
     }
 
     // Reset values and remove error
-    addClassification(classification);
+    await addClassification(classification);
     setSerror({
       hasError: false,
     });
@@ -119,6 +121,7 @@ export function CreateClassification({
           <TextField
             value={classification.name || ''}
             onChange={onNameChange}
+            label={`${classificationType} name`}
             fullWidth
             placeholder="Name"
           />
@@ -127,6 +130,10 @@ export function CreateClassification({
             onChange={onClassificationChange}
             fullWidth
             placeholder="Classification"
+            InputProps={{
+              inputProps: { min: 1 },
+            }}
+            label={`${classificationType} classification`}
           />
         </Stack>
         <Typography color="error">{error?.message}</Typography>
