@@ -23,6 +23,7 @@ import {
   getDestinations,
   updateDestination,
 } from "../api/destinations-service";
+import { useTranslation } from "react-i18next";
 
 type classificationAlias = "RECEIVER" | "DESTINATION";
 
@@ -31,6 +32,13 @@ export interface ClassificationInterfaceProps {
 }
 
 export function Classification({ type }: ClassificationInterfaceProps) {
+
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
+
   const [classificationList, setClassificationList] = useState<
     ClassificationModel[]
   >([]);
@@ -112,7 +120,7 @@ export function Classification({ type }: ClassificationInterfaceProps) {
           addClassification={addClassification}
         >
           <Typography variant="h6">
-            Create a new {type.toLowerCase()}
+             {t("Welcome to React") }
           </Typography>
         </CreateClassification>
         <Paper>
