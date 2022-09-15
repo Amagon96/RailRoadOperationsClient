@@ -38,9 +38,10 @@ export function CreateClassification({
   const onNameChange = (event: FormEvent<{ value: string }>) => {
     const name = event.currentTarget.value;
 
-    setClassification(
-      new CreateClassificationModel(name, classification.classification)
-    );
+    setClassification({
+      ...classification,
+      name,
+    });
   };
 
   const onClassificationChange = (event: FormEvent<{ value: string }>) => {
