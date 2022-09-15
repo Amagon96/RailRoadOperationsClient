@@ -10,6 +10,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
 import React, {FormEvent} from "react";
 import { TrainCarValuesInterface } from "./car-item";
+import { ITrainCar } from "../../types/TrainCar";
 
 export interface EditRowProps {
   values: TrainCarValuesInterface;
@@ -19,6 +20,7 @@ export interface EditRowProps {
   onDestinationChange: (event: SelectChangeEvent) => void;
   onReceiverChange: (event: SelectChangeEvent) => void;
   disableEdition: () => void;
+  onUpdate: () => void;
 }
 
 export const EditRow = ({
@@ -28,8 +30,10 @@ export const EditRow = ({
   onNameChange,
   onDestinationChange,
   onReceiverChange,
-  disableEdition
+  disableEdition,
+  onUpdate
 }: EditRowProps) => {
+    
   return (
     <Stack
       direction="row"
@@ -84,7 +88,7 @@ export const EditRow = ({
           </FormControl>
         </Box>
         <Stack direction="row">
-          <IconButton color="primary" onClick={disableEdition}>
+          <IconButton color="primary" onClick={onUpdate}>
             <CheckIcon />
           </IconButton>
           <IconButton color="error" onClick={disableEdition}>

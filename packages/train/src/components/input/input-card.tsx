@@ -62,6 +62,14 @@ function InputCard({ onSort }: InputCardProps) {
     });
   };
 
+  const handleUpdate = (id: string,newCar:ITrainCar) => {
+    setTrainList((prevState) => {
+      const nextState = new Map(prevState);
+      nextState.set(id,newCar)
+      return nextState;
+    });
+  };
+
   return (
     <Box
       sx={{
@@ -125,6 +133,7 @@ function InputCard({ onSort }: InputCardProps) {
                   destinationOptions={destinationOptions}
                   receiverOptions={receiverOptions}
                   removeItem={handleRemove}
+                  updateItem={handleUpdate}
                 />
               );
             })}

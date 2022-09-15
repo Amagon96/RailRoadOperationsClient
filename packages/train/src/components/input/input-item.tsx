@@ -11,6 +11,7 @@ export interface InputItemProps {
   values: TrainCarValuesInterface;
   enableEdition: () => void;
   onDelete: () => void;
+  
 }
 
 export const InputItem = ({
