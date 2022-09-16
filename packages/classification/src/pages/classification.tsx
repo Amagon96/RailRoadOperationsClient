@@ -133,7 +133,7 @@ export function Classification({ type }: ClassificationInterfaceProps) {
               <LocalShippingIcon sx={{ color: "#FFF" }} />
             </Box>
             <Typography variant="h6" textTransform="capitalize">
-              {type.toLowerCase()}s
+              {t(`${type.toLowerCase()}-plural`)}
             </Typography>
           </Stack>
           <Divider />

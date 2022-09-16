@@ -13,6 +13,8 @@ import { InputLabel } from "./input-label";
 import Button from "@mui/material/Button/Button";
 import { DestinationService } from "../../api/DestinationService";
 import { ReceiverService } from "../../api/ReceiverService";
+import { useTranslation } from "react-i18next";
+
 
 interface InputCardProps {
   onSort: (sortedTrain: ITrainCar[]) => void;
@@ -24,6 +26,8 @@ function InputCard({ onSort }: InputCardProps) {
   );
   const [destinationOptions, setDestinationOptions] = useState([]);
   const [receiverOptions, setReceiverOptions] = useState([]);
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     (async () => {
@@ -109,10 +113,10 @@ function InputCard({ onSort }: InputCardProps) {
               <TrainIcon sx={{ color: "#FFF" }} />
             </Box>
             <Typography sx={{ flex: 1 }} variant="h6">
-              Enter a train configuration
+              {t("input-card-train-configuration")}
             </Typography>
             <Button variant="contained" onClick={handleSort}>
-              Sort
+            {t("input-card-train-sort")}
             </Button>
           </Stack>
           <Divider />
