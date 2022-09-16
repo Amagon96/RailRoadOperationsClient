@@ -21,7 +21,17 @@ const resources = {
       "create-destination-name-field": "Destination name",
       "create-destination-classification-field": "Destination classification",
       "create-receiver-name-field": "Receiver name",
-      "create-receiver-classification-field": "Receiver classification",
+      "create-receiver-classification-field": "Receiver name",
+      "input-card-train-configuration": "Please enter a train configuration",
+      "input-card-train-sort": "Sort",
+      "input-label-name": "Name",
+      "input-label-destination": "Destination",
+      "input-label-receiver": "Receiver",
+      "output-card-sorted": "Sorted train",
+      "output-label-name": "Name",
+      "output-label-destination": "Destination",
+      "output-label-receiver": "Receiver",
+      "output-label-classification-track": "Classification Track",
     }
   },
   es: {
@@ -40,7 +50,17 @@ const resources = {
       "create-destination-name-field": "Nombre del destino",
       "create-destination-classification-field": "Clasificación del destino",
       "create-receiver-name-field": "Nombre del receptor",
-      "create-receiver-classification-field": "Clasificación del receptor"
+      "create-receiver-classification-field": "Clasificación del receptor",
+      "input-card-train-configuration": "Por favor proporciona una configuración de tren",
+      "input-card-train-sort": "Ordenar",
+      "input-label-name": "Nombre",
+      "input-label-destination": "Destino",
+      "input-label-receiver": "Receptor",
+      "output-card-sorted": "Tren ordenado",
+      "output-label-name": "Nombre",
+      "output-label-destination": "Destino",
+      "output-label-receiver": "Receptor",
+      "output-label-classification-track": "Carril de Clasificación",
     }
   }
 };
