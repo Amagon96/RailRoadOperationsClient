@@ -97,10 +97,10 @@ export function ClassificationItem({
             />
           </Box>
           <Stack direction="row">
-            <IconButton color="primary" onClick={submitUpdate}>
+            <IconButton color="primary" onClick={submitUpdate} aria-label={"Submit"}>
               <CheckIcon />
             </IconButton>
-            <IconButton color="error" onClick={disableEdition}>
+            <IconButton color="error" onClick={disableEdition} aria-label={"Cancel"}>
               <CancelIcon />
             </IconButton>
           </Stack>
@@ -130,10 +130,10 @@ export function ClassificationItem({
       >
         <Typography lineHeight="40px">{values.classification || ""}</Typography>
         <Stack direction="row">
-          <IconButton color="primary" onClick={enableEdition}>
+          <IconButton color="primary" onClick={enableEdition} aria-label={"Edit"}>
             <EditIcon />
           </IconButton>
-          <IconButton color="error" onClick={onDelete}>
+          <IconButton color="error" onClick={onDelete} aria-label={"Delete"}>
             <DeleteIcon />
           </IconButton>
         </Stack>

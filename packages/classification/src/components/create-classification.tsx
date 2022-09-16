@@ -6,6 +6,8 @@ import Button from "@mui/material/Button/Button";
 import Stack from "@mui/material/Stack/Stack";
 import Box from "@mui/material/Box/Box";
 import Typography from "@mui/material/Typography/Typography";
+import { useTranslation } from "react-i18next";
+
 
 interface CreateClassificationError {
   message?: string;
@@ -16,6 +18,7 @@ export interface CreateClassificationInterface {
   addClassification: (classification: CreateClassificationModel) => void;
   findDuplicatedName: (name: string) => boolean;
   findDuplicatedClassification: (classification: number) => boolean;
+  classificationType: string,
   children: ReactChild;
 }
 
@@ -23,6 +26,7 @@ export function CreateClassification({
   addClassification,
   findDuplicatedName,
   findDuplicatedClassification,
+  classificationType,
   children,
 }: CreateClassificationInterface): JSX.Element {
   const [classification, setClassification] =
@@ -31,6 +35,8 @@ export function CreateClassification({
   const [error, setSerror] = useState<CreateClassificationError>({
     hasError: false,
   });
+
+  const { t, i18n } = useTranslation();
 
   const onNameChange = (event: FormEvent<{ value: string }>) => {
     const name = event.currentTarget.value;
@@ -54,7 +60,7 @@ export function CreateClassification({
     });
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     // Run validations
     if (classification.name.trim() === "") {
       setSerror({
@@ -93,7 +99,7 @@ export function CreateClassification({
     }
 
     // Reset values and remove error
-    addClassification(classification);
+    await addClassification(classification);
     setSerror({
       hasError: false,
     });
@@ -119,6 +125,7 @@ export function CreateClassification({
           <TextField
             value={classification.name || ''}
             onChange={onNameChange}
+            label={t(`create-${classificationType}-name-field`)}
             fullWidth
             placeholder="Name"
           />
@@ -127,6 +134,10 @@ export function CreateClassification({
             onChange={onClassificationChange}
             fullWidth
             placeholder="Classification"
+            InputProps={{
+              inputProps: { min: 1 },
+            }}
+            label={t(`create-${classificationType}-classification-field`)}
           />
         </Stack>
         <Typography color="error">{error?.message}</Typography>
@@ -143,7 +154,7 @@ export function CreateClassification({
             color="primary"
             fullWidth
           >
-            Save
+            {t("create-classification-save-button")}
           </Button>
         </Box>
       </Stack>

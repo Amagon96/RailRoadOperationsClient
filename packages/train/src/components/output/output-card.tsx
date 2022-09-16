@@ -8,12 +8,15 @@ import { ITrainCar } from "../../types/TrainCar";
 import SortIcon from '@mui/icons-material/Sort';
 import { OutputLabel } from "./output-label";
 import { OutputItem } from "./output-item";
+import { useTranslation } from "react-i18next";
 
 interface OutputCardProps{
   carList: ITrainCar[]
 }
 
-function OutputCard({carList}:OutputCardProps) {
+function OutputCard({ carList }: OutputCardProps) {
+  const { t, i18n } = useTranslation();
+  
   return (
     <Box
       sx={{
@@ -52,7 +55,7 @@ function OutputCard({carList}:OutputCardProps) {
             >
               <SortIcon sx={{ color: "#FFF" }} />
             </Box>
-            <Typography variant="h6">Sorted Train</Typography>
+            <Typography variant="h6">{t("output-card-sorted")}</Typography>
           </Stack>
           <Divider />
           <OutputLabel>

@@ -1,7 +1,10 @@
 import * as React from "react";
 import { Box, Link, AppBar, Toolbar, Typography, Button } from "@mui/material/";
+import { useTranslation } from "react-i18next";
 
 export default function Links() {
+  const { t, i18n } = useTranslation();
+
   return (
     <Box
       sx={{

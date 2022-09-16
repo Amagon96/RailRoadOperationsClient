@@ -42,46 +42,28 @@ export function Classification({ type }: ClassificationInterfaceProps) {
   const [classificationList, setClassificationList] = useState<
     ClassificationModel[]
   >([]);
+  
 
   const removeClassification = async (id: string) => {
-    if (type === "RECEIVER") {
-      await deleteReceiver(id);
-    }
-    if (type === "DESTINATION") {
-      await deleteDestination(id);
-    }
-    setClassificationList(classificationList.filter((item) => item.id !== id));
+    const deleteFunction = type === "RECEIVER"? deleteReceiver : deleteDestination
+    await deleteFunction(id)
+    await getClassifications();
   };
 
   const updateClassification = () => {
-    if (type === "RECEIVER") {
-      return updateReceiver;
-    }
-    if (type === "DESTINATION") {
-      return updateDestination;
-    }
+    return type === "RECEIVER"? updateReceiver : updateDestination
   };
 
-  const addClassification = (classification: CreateClassificationModel) => {
-    if (type === "RECEIVER") {
-      createReceiver(classification).then(() => getClassifications());
-    }
-    if (type === "DESTINATION") {
-      createDestination(classification).then(() => getClassifications());
-    }
+  const addClassification = async (classification: CreateClassificationModel) => {
+    const createFunction = type === "RECEIVER"? createReceiver : createDestination
+    await createFunction(classification)
+    await getClassifications()
   };
 
-  const getClassifications = () => {
-    if (type === "RECEIVER") {
-      getReceivers().then(({ data }) => {
-        setClassificationList(data);
-      });
-    }
-    if (type === "DESTINATION") {
-      getDestinations().then(({ data }) => {
-        setClassificationList(data);
-      });
-    }
+  const getClassifications = async () => {
+    const getFunction = type === "RECEIVER"? getReceivers : getDestinations
+    const {data} = await getFunction()
+    setClassificationList(data);
   };
 
   const findDuplicatedName = (name: string): boolean => {
@@ -122,6 +104,7 @@ export function Classification({ type }: ClassificationInterfaceProps) {
           findDuplicatedName={findDuplicatedName}
           findDuplicatedClassification={findDuplicatedClassification}
           addClassification={addClassification}
+          classificationType={type.toLowerCase()}
         >
           <Typography variant="h6">
             {t('create')} {t(type).toLowerCase()}
@@ -150,7 +133,7 @@ export function Classification({ type }: ClassificationInterfaceProps) {
               <LocalShippingIcon sx={{ color: "#FFF" }} />
             </Box>
             <Typography variant="h6" textTransform="capitalize">
-              {type.toLowerCase()}s
+              {t(`${type.toLowerCase()}-plural`)}
             </Typography>
           </Stack>
           <Divider />
